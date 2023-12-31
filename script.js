@@ -1,5 +1,7 @@
 
+//wihtout API
 
+/*
 let jokes = ["How does the ocean say hi? It waves!",
 "Name the kind of tree you can hold in your hand? A palm tree!",
 "Where did the music teacher leave her keys? In the piano!",
@@ -46,3 +48,47 @@ let SASTE_JOKES = () =>{
     a.innerHTML = random;
   }
   document.getElementById("btn").addEventListener("click",SASTE_JOKES);
+*/
+
+//fetching API
+
+let a = document.querySelector(".container");
+ let btn=document.getElementById("btn");
+let url="https://icanhazdadjoke.com/";
+
+//using async await
+
+const jokegenerator=async()=>{
+  let response=await fetch('https://icanhazdadjoke.com/',{
+    headers: {
+        "Accept" : "application/json"
+    }
+  });
+  let data= await response.json();
+  console.log(data.joke);
+  a.innerHTML=data.joke;
+
+ }
+
+
+
+ //using promises
+/*
+function gen(){
+  let response=fetch('https://icanhazdadjoke.com/',{
+    headers: {
+        "Accept" : "application/json"
+    }
+  })
+  .then((response)=>{
+   return response.json();
+  })
+  .then((data)=>{
+    a.innerHTML=data.joke;
+    console.log(data);
+  
+  })
+}
+*/
+btn.addEventListener("click",jokegenerator);
+
